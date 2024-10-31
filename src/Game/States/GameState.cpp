@@ -6,12 +6,14 @@ GameState::GameState() {
 	mapImage.load("images/map2.png");
 	map = MapBuilder().createMap(mapImage);
 }
+
 void GameState::tick() {
-	if(!music.isPlaying()){
+	if (!music.isPlaying()) {
 			music.play();
 	}
+
 	map->tick();
-	if(map->getPlayer()->getHealth() == 0){
+	if (map->getPlayer()->getHealth() == 0) {
 		setFinished(true);
 		setNextState("over");
 		map->getPlayer()->setHealth(3);
@@ -19,23 +21,24 @@ void GameState::tick() {
 		map->getPlayer()->setScore(0);
 	}
 }
+
 void GameState::render() {
 	map->render();
 }
 
-void GameState::keyPressed(int key){
+void GameState::keyPressed(int key) {
 	map->keyPressed(key);
 }
 
-void GameState::mousePressed(int x, int y, int button){
+void GameState::mousePressed(int x, int y, int button) {
 	map->mousePressed(x, y, button);
 }
 
-void GameState::keyReleased(int key){
+void GameState::keyReleased(int key) {
 	map->keyReleased(key);
 }
 
-void GameState::reset(){
+void GameState::reset() {
 	setFinished(false);
 	setNextState("");
 	map = MapBuilder().createMap(mapImage);
@@ -47,11 +50,11 @@ void GameState::ContinueState() {
 	map = map;
 }
 
-int GameState::getFinalScore(){
+int GameState::getFinalScore() {
 	return finalScore;
 }
 
-GameState::~GameState(){
+GameState::~GameState() {
 	delete map;
 }
 

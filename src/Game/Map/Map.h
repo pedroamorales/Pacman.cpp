@@ -4,7 +4,8 @@
 #include "GhostSpawner.h"
 #include "EntityManager.h"
 
-class Map{
+class Map {
+
     public:
       Map(EntityManager*);
       ~Map();
@@ -20,8 +21,8 @@ class Map{
 		  void keyReleased(int key);
       EntityManager *entityManager;
       int GetDotsPlayer();
+
     private:
-      
       Player *player;
       GhostSpawner* gs;
 };

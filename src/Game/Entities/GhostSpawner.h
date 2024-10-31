@@ -2,7 +2,8 @@
 
 #include "EntityManager.h"
 
-class GhostSpawner: public Entity{
+class GhostSpawner: public Entity {
+    
     public:
         GhostSpawner(int, int, int , int, EntityManager*, ofImage);
         void spawnGhost(string);
@@ -11,6 +12,5 @@ class GhostSpawner: public Entity{
 
     private:
         EntityManager* em;
-        int spawnCounter = 30*5;
-        
+        int spawnCounter = 30*5;      
 };

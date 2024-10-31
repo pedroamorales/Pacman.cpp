@@ -5,14 +5,12 @@
 #include "Animation.h" 
 #include "ChooseState.h"
 
-
 class MenuState : public State {
+
 private:
 	ofImage img1;
 	Button *startButton;
 	Animation* anim;
-	
-	
 
 public:
 	MenuState();

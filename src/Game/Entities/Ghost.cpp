@@ -1,7 +1,7 @@
 #include "Ghost.h"
 #include "BoundBlock.h"
 
-Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color): Entity(x, y, width, height){
+Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color): Entity(x, y, width, height) {
     this->em = em;
     vector<ofImage> killableFrames;
     ofImage temp;
@@ -15,54 +15,62 @@ Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityMan
     killableFrames.push_back(temp);
     killableAnim = new Animation(10, killableFrames);
 
-    if(color == "red")      sprite.cropFrom(spriteSheet,456,64,16,16);
-    else if(color=="pink")  sprite.cropFrom(spriteSheet,456,79,16,16);
-    else if(color=="cyan")  sprite.cropFrom(spriteSheet,456,96,16,16);
-    else if(color=="orange")sprite.cropFrom(spriteSheet,456,113,16,16);
+    if (color == "red")      sprite.cropFrom(spriteSheet,456,64,16,16);
+    else if (color=="pink")  sprite.cropFrom(spriteSheet,456,79,16,16);
+    else if (color=="cyan")  sprite.cropFrom(spriteSheet,456,96,16,16);
+    else if (color=="orange")sprite.cropFrom(spriteSheet,456,113,16,16);
     
 
 }
 
-void Ghost::tick(){
+void Ghost::tick() {
     killableAnim->tick();
     canMove = true;
     checkCollisions();
-    if(canMove){
-        if(facing == UP){
+    if (canMove) {
+        if (facing == UP) {
             y-= speed;
-        }else if(facing == DOWN){
+        }
+        else if (facing == DOWN) {
             y+=speed;
-        }else if(facing == LEFT){
+        }
+        else if (facing == LEFT) {
             x-=speed;
-        }else if(facing == RIGHT){
+        }
+        else if (facing == RIGHT) {
             x+=speed;
         }
-    }else{
+    }
+    else {
         int randInt;
-        if(justSpawned){
+        if(justSpawned) {
             randInt = ofRandom(2);
-
-        }else{
+        }
+        else {
             randInt = ofRandom(4);
         }
-        if(randInt == 0){
+        if (randInt == 0) {
             facing = LEFT;
-        }else if(randInt == 1){
+        } 
+        else if (randInt == 1) {
             facing = RIGHT;
-        }else if(randInt == 2){
+        }
+        else if (randInt == 2) {
             facing = DOWN;
-        }else if(randInt == 3){
+        }
+        else if (randInt == 3) {
             facing = UP;
         }
-        justSpawned = false;
 
+        justSpawned = false;
     }
 }
 
-void Ghost::render(){
-    if(killable){
+void Ghost::render() {
+    if (killable) {
         killableAnim->getCurrentFrame().draw(x,y,width,height);
-    }else{
+    }
+    else {
         Entity::render();
     }
 }
@@ -70,29 +78,31 @@ void Ghost::render(){
 bool Ghost::getKillable(){
     return killable;
 }
+
 void Ghost::setKillable(bool k){
     killable = k;
 }
+
 void Ghost::checkCollisions(){
-    for(BoundBlock* BoundBlock: em->boundBlocks){
-        switch(facing){
+    for (BoundBlock* BoundBlock: em->boundBlocks) {
+        switch (facing) {
             case UP:
-                if(this->getBounds(x, y-speed).intersects(BoundBlock->getBounds())){
+                if (this->getBounds(x, y-speed).intersects(BoundBlock->getBounds())) {
                     canMove = false;
                 }
                 break;
             case DOWN:
-                if(this->getBounds(x, y+speed).intersects(BoundBlock->getBounds())){
+                if (this->getBounds(x, y+speed).intersects(BoundBlock->getBounds())) {
                     canMove = false;
                 }
                 break;
             case LEFT:
-                if(this->getBounds(x-speed, y).intersects(BoundBlock->getBounds())){
+                if (this->getBounds(x-speed, y).intersects(BoundBlock->getBounds())) {
                     canMove = false;
                 }
                 break;
             case RIGHT:
-                if(this->getBounds(x+speed, y).intersects(BoundBlock->getBounds())){
+                if (this->getBounds(x+speed, y).intersects(BoundBlock->getBounds())) {
                     canMove = false;
                 }
                 break;
@@ -100,6 +110,6 @@ void Ghost::checkCollisions(){
     }
 }
 
-Ghost::~Ghost(){
+Ghost::~Ghost() {
     delete killableAnim;
 }

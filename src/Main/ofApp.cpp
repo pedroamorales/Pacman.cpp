@@ -1,6 +1,6 @@
 #include "ofApp.h"
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
 	ofSetFrameRate(30);
 	ofSetWindowTitle("C++ Game Box");
 	//States
@@ -13,99 +13,92 @@ void ofApp::setup(){
 	
 	// Initial State
 	currentState = chooseState;
-	
-	
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
 	currentState->setID(chooseState->getIDc());
-	if (currentState != nullptr){
+	if (currentState != nullptr) {
 		
 		currentState->tick();
-		if(currentState->hasFinished()){
-			if(currentState->getNextState() == "Menu"){
-				if(Pcheck) {
+		if (currentState->hasFinished()) {
+			if (currentState->getNextState() == "Menu") {
+				if (Pcheck) {
 					Pcheck = false;
 				}
 				currentState = menuState;
 				currentState->reset();
-			}else if(currentState->getNextState() == "Game"){
-				
+			}
+			else if (currentState->getNextState() == "Game") {
 				currentState = gameState;
 				Wcheck = false;
-				if(Pcheck) {
+				if (Pcheck) {
 					Pcheck = false;
 					currentState->ContinueState();
-				} else {
+				}
+				else {
 				currentState->reset();
 				}
-			}else if(currentState->getNextState() == "Pause"){
-				
+			}
+			else if (currentState->getNextState() == "Pause") {
 				currentState = pauseState;
 				currentState->reset();
-			}else if(currentState->getNextState() == "Win" && !Wcheck){
-				
+			}
+			else if (currentState->getNextState() == "Win" && !Wcheck) {
 				currentState = winState;
 				currentState->reset();
 				Wcheck = true;
-			}else if(currentState->getNextState() == "over"){
-				
+			}
+			else if (currentState->getNextState() == "over") {
 				gameOverState->setScore(gameState->getFinalScore());
 				currentState = gameOverState;
 				gameState->reset();
 				currentState->reset();
-				
 			}
-		
 		}
 	}
-	
-	if(gameState->GetDotCountState() == 0 && !Wcheck) {
+	if (gameState->GetDotCountState() == 0 && !Wcheck) {
 		currentState->setNextState("Win");
 		currentState->setFinished(true);
 	}
-	
-	
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	if (currentState != nullptr)
 		currentState->render();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	if (currentState != nullptr){
+void ofApp::keyPressed(int key) {
+	if (currentState != nullptr) {
 		currentState->keyPressed(key);
 	}
+
 	//Turn Volume Down (Mute)	
-	if( key == '-' ){
+	if ( key == '-' ) {
 		ofSoundSetVolume(0);
 	}
 	
 	//Turn Volume Back Up
-	if( key == '=' ){
+	if ( key == '=' ) {
 		ofSoundSetVolume(1);
 	}
+
 	if (key == 'p') {
 		currentState->setNextState("Pause");
 		currentState->setFinished(true);
 		Pcheck = true;
 	}
+
 	if (key == 'y') {
 		currentState->setNextState("Win");
 		currentState->setFinished(true);
 	}
-	
-	
-	
-
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyReleased(int key) {
 	if (currentState != nullptr)
 			currentState->keyReleased(key);
 }

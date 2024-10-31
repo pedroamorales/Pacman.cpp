@@ -11,8 +11,7 @@ class MapBuilder {
     public:
         MapBuilder();
 	    Map* createMap(ofImage);
-      
-
+        
 	private:
         vector<ofImage> bound;
         vector<Entity> dots;

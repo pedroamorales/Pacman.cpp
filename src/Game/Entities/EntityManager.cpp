@@ -4,11 +4,13 @@
 #include "BigDot.h"
 
 void EntityManager::tick(){
-    if(killable){
+    if (killable) {
         killableCounter--;
-        if (killableCounter == 0){
+
+        if (killableCounter == 0) {
             killable = false;
-            for(Entity* entity : ghosts){
+
+            for (Entity* entity : ghosts) {
                 Ghost* ghost = dynamic_cast<Ghost*>(entity); 
                 ghost->setKillable(false);
             }
@@ -16,25 +18,26 @@ void EntityManager::tick(){
     }
     
     for(unsigned int i=0;i<entities.size();i++){
-        if(!entities[i]->remove){
+        if (!entities[i]->remove) {
             entities[i]->tick();
 
-        }else{
+        }
+        else {
             Entity* entityPointer = entities[i];
             entities.erase(entities.begin() + i--);
             delete entityPointer;
-
         }
     }
 
-    for(BoundBlock* BoundBlock: boundBlocks){
+    for (BoundBlock* BoundBlock: boundBlocks) {
         BoundBlock->tick();
     }
-    for(unsigned int i=0;i<ghosts.size();i++){
-        if(!ghosts[i]->remove){
+    for (unsigned int i=0;i<ghosts.size();i++) {
+        if (!ghosts[i]->remove) {
             ghosts[i]->tick();
 
-        }else{
+        }
+        else {
             Ghost* ghostPtr = dynamic_cast<Ghost*>(ghosts[i]);
             ghosts.erase(ghosts.begin() + i--);
             delete ghostPtr;
@@ -43,28 +46,28 @@ void EntityManager::tick(){
 
 }
 
-void EntityManager::render(){
-    for(Entity* entity: entities){
+void EntityManager::render() {
+    for (Entity* entity: entities) {
         entity->render();
     }
-    for(BoundBlock* BoundBlock: boundBlocks){
+    for (BoundBlock* BoundBlock: boundBlocks) {
         BoundBlock->render();
     }
-    for(Entity* ghost: ghosts){
+    for (Entity* ghost: ghosts) {
         ghost->render();
     }
 }
 
-void EntityManager::setKillable(bool k){
+void EntityManager::setKillable(bool k) {
     killable = true;
     killableCounter=10*ofGetFrameRate();
-    for(Entity* entity:ghosts){
+    for (Entity* entity:ghosts) {
         Ghost* ghost = dynamic_cast<Ghost*>(entity); 
         ghost->setKillable(true);
     }
 }
 
-EntityManager::~EntityManager(){
+EntityManager::~EntityManager() {
     for(Entity* e: boundBlocks) delete dynamic_cast<BoundBlock*>(e);
 
     for(Entity* e: ghosts) delete dynamic_cast<Ghost*>(e);
@@ -76,7 +79,6 @@ EntityManager::~EntityManager(){
     entities.clear();
 }
 
+void EntityManager::keyPressed(int key) {
 
-
-void EntityManager::keyPressed(int key){
 }

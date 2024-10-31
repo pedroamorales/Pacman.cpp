@@ -9,7 +9,8 @@ enum MOVING {
 	MLEFT,
 	MRIGHT,
 };
-class Player: public Entity{
+
+class Player: public Entity {
 
     private:
         int spawnX, spawnY;

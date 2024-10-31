@@ -12,12 +12,12 @@ ChooseState::ChooseState() {
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
     ofImage temp;
-	for(int i=0; i<3; i++){
+	for (int i=0; i<3; i++) {
         temp.cropFrom(img1, i*16, 0, 16, 16);
         rightAnimframes.push_back(temp);
     }
+
 	anim = new Animation(10,rightAnimframes);
-	
 }
 
 void ChooseState::tick() {
@@ -26,7 +26,7 @@ void ChooseState::tick() {
 	greenButton->tick();
 	redButton->tick();
 	anim->tick();
-	if(yellowButton->wasPressed()){
+	if (yellowButton->wasPressed()) {
 		setID(0);
 		setNextState("Menu");
 		setFinished(true);
@@ -36,12 +36,12 @@ void ChooseState::tick() {
 		setNextState("Menu");
 		setFinished(true);
 	}
-	if(redButton->wasPressed()) {
+	if (redButton->wasPressed()) {
 		setID(2);
 		setNextState("Menu");
 		setFinished(true);
 	}
-	if(greenButton->wasPressed()) {
+	if (greenButton->wasPressed()) {
 		setID(3);
 		setNextState("Menu");
 		setFinished(true);
@@ -49,7 +49,6 @@ void ChooseState::tick() {
 }
 
 void ChooseState::render() {
-	
 	ofDrawBitmapString("Choose your character.", ofGetWidth()/2, ofGetHeight()/2-300, 50);
 	ofSetBackgroundColor(0, 0, 0);
 	ofSetColor(256, 256, 256);
@@ -58,36 +57,29 @@ void ChooseState::render() {
 	blueButton->render();
 	greenButton->render();
 	redButton->render();
-
-
 }
 
-
-
-void ChooseState::mousePressed(int x, int y, int button){
+void ChooseState::mousePressed(int x, int y, int button) {
 	yellowButton->mousePressed(x, y);
 	blueButton->mousePressed(x, y);
 	greenButton->mousePressed(x, y);
 	redButton->mousePressed(x, y);
 }
 
-void ChooseState::reset(){
+void ChooseState::reset() {
 	setFinished(false);
 	setNextState("");
 	yellowButton->reset();
 	blueButton->reset();
 	greenButton->reset();
 	redButton->reset();
-	
-	
 }
 
+void ChooseState::setScore(int sc) {
 
-void ChooseState::setScore(int sc){
-    
 }
 
-ChooseState::~ChooseState(){
+ChooseState::~ChooseState() {
 	delete yellowButton;
     delete blueButton;
 	delete greenButton;
@@ -96,7 +88,7 @@ ChooseState::~ChooseState(){
 	setNextState("");
 }
 
-void ChooseState::keyPressed(int key){
+void ChooseState::keyPressed(int key) {
    
 }
 

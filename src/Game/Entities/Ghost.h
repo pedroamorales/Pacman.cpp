@@ -3,7 +3,7 @@
 #include "EntityManager.h"
 #include "Animation.h"
 
-class Ghost: public Entity{
+class Ghost: public Entity {
     public:
         Ghost(int, int, int, int, ofImage, EntityManager*, string);
         ~Ghost();
@@ -11,6 +11,7 @@ class Ghost: public Entity{
         void render();
         bool getKillable();
         void setKillable(bool);
+
     private:
         bool killable = false;
         FACING facing = UP;
@@ -20,5 +21,4 @@ class Ghost: public Entity{
         int speed=2;
         EntityManager* em;
         Animation* killableAnim;
-
 };

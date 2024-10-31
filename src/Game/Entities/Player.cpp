@@ -5,7 +5,7 @@
 #include "Ghost.h"
 #include "State.h"
 
-Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
+Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height) {
     spawnX = x;
     spawnY = y;
     DotsEaten = 0;
@@ -21,22 +21,24 @@ Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(
     vector<ofImage> leftAnimframes;
     vector<ofImage> rightAnimframes;
     ofImage temp;
-    for(int i=0; i<3; i++){
+
+    for (int i=0; i<3; i++) {
         temp.cropFrom(sprite, i*16, 48, 16, 16);
         downAnimframes.push_back(temp);
     }
-    for(int i=0; i<3; i++){
+    for (int i=0; i<3; i++) {
         temp.cropFrom(sprite, i*16, 32, 16, 16);
         upAnimframes.push_back(temp);
     }
-    for(int i=0; i<3; i++){
+    for (int i=0; i<3; i++) {
         temp.cropFrom(sprite, i*16, 16, 16, 16);
         leftAnimframes.push_back(temp);
     }
-    for(int i=0; i<3; i++){
+    for (int i=0; i<3; i++) {
         temp.cropFrom(sprite, i*16, 0, 16, 16);
         rightAnimframes.push_back(temp);
     }
+
     walkDown = new Animation(1,downAnimframes);
     walkUp = new Animation(1,upAnimframes);
     walkLeft = new Animation(1,leftAnimframes);
@@ -47,7 +49,8 @@ Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(
     moving = MLEFT;
     
 }
-void Player::tick(){
+
+void Player::tick() {
 
     checkCollisions();
 
@@ -75,7 +78,7 @@ void Player::tick(){
     }
 }
 
-void Player::render(){
+void Player::render() {
     ofSetColor(256,256,256);
     // ofDrawRectangle(getBounds());
 
@@ -94,11 +97,12 @@ void Player::render(){
     for(unsigned int i=0; i<health; i++){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
+
     ofDrawBitmapString("Score:"  + to_string(DotCount), ofGetWidth()/2-200, 50);
 }
 
-void Player::keyPressed(int key){
-    switch(key){
+void Player::keyPressed(int key) {
+    switch(key) {
         case 'w':
             moving = MUP;
             break;
@@ -118,17 +122,17 @@ void Player::keyPressed(int key){
             if (health < 3) {
                health++; 
             }
-            
             break;
     }
 }
 
-void Player::keyReleased(int key){
+void Player::keyReleased(int key) {
     if(key == 'w' || key =='s' || key == 'a' || key == 'd'){
         walking = false;
     }
 }
-void Player::mousePressed(int x, int y, int button){
+
+void Player::mousePressed(int x, int y, int button) {
 
 }
 
@@ -139,13 +143,14 @@ void Player::setHealth(int h){ health = h; }
 void Player::setFacing(FACING facing){ this->facing = facing; }
 void Player::setScore(int h){ score = h; }
 
-void Player::checkCollisions(){
+void Player::checkCollisions() {
     canMoveUp = true;
     canMoveDown = true;
     canMoveLeft = true;
     canMoveRight = true;
     CurrentDotCount();
-    for(BoundBlock* boundBlock: em->boundBlocks){
+
+    for(BoundBlock* boundBlock: em->boundBlocks) {
         if(this->getBounds(x, y-speed).intersects(boundBlock->getBounds()))
             canMoveUp = false;
         if(this->getBounds(x, y+speed).intersects(boundBlock->getBounds()))
@@ -155,45 +160,41 @@ void Player::checkCollisions(){
         if(this->getBounds(x+speed, y).intersects(boundBlock->getBounds()))
             canMoveRight = false;
     }
-    for(Entity* entity:em->entities){
-        if(collides(entity)){
-            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity)){
+
+    for(Entity* entity:em->entities) {
+        if (collides(entity)) {
+            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity)) {
                 entity->remove = true;
                 score += 10;
                 DotsEaten++;
                 DotsEaten = DotsEaten/2;
-                
             }
-            if(dynamic_cast<BigDot*>(entity)){
+
+            if(dynamic_cast<BigDot*>(entity)) {
                 score +=20;
-                
                 em->setKillable(true);
-                
             }
         }
     }
     
-    for(Entity* entity:em->ghosts){
-        if(collides(entity)){
+    for(Entity* entity:em->ghosts) {
+        if (collides(entity)) {
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
             if(ghost->getKillable())
                 ghost->remove = true;
             else
                 die();
         }
-    }
-
-    
+    }    
 }
 
-void Player::die(){
+void Player::die() {
     health--;
     x = spawnX;
     y = spawnY;
-
 }
 
-Player::~Player(){
+Player::~Player() {
     delete walkUp;
     delete walkDown;
     delete walkLeft;

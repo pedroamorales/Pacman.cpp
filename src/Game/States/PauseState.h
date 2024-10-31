@@ -5,13 +5,13 @@
 #include "Animation.h" 
 
 class PauseState : public State {
+	
 private:
 	ofImage img1;
 	Button *resumeButton;
     Button *quitButton;
 	Animation* anim;
 	int score=0;
-	
 
 public:
 	PauseState();

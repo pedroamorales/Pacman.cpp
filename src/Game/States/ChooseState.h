@@ -16,7 +16,6 @@ private:
 	Button *redButton;
 	Animation* anim;
 	int IDc;
-	
 
 public:
 	ChooseState();
@@ -29,5 +28,4 @@ public:
 	void setScore(int);
 	int getIDc();
 	void ContinueState();
-	
 };

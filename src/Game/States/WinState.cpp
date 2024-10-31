@@ -13,7 +13,6 @@ WinState::WinState() {
         rightAnimframes.push_back(temp);
     }
 	anim = new Animation(10,rightAnimframes);
-	
 }
 
 void WinState::tick() {
@@ -31,45 +30,41 @@ void WinState::tick() {
 }
 
 void WinState::render() {
-	
 	ofDrawBitmapString("WINNER!!", ofGetWidth()/2, ofGetHeight()/2-300, 50);
 	ofSetBackgroundColor(0, 0, 0);
 	ofSetColor(256, 256, 256);
 	anim->getCurrentFrame().draw(ofGetWidth()/2, ofGetHeight()/2-100, 100, 100);
 	resumeButton->render();
 	quitButton->render();
-
-
 }
 
-
-
-void WinState::mousePressed(int x, int y, int button){
+void WinState::mousePressed(int x, int y, int button) {
 	resumeButton->mousePressed(x, y);
 	quitButton->mousePressed(x, y);
 }
 
-void WinState::reset(){
+void WinState::reset() {
 	setFinished(false);
 	setNextState("");
 	resumeButton->reset();
 	quitButton->reset();
-	
-}
-void WinState::ContinueState() {
 }
 
-void WinState::setScore(int sc){
+void WinState::ContinueState() {
+
+}
+
+void WinState::setScore(int sc) {
     score = sc;
 }
 
-WinState::~WinState(){
+WinState::~WinState() {
 	delete resumeButton;
     delete quitButton;
 	delete anim;
 	setNextState("");
 }
 
-void WinState::keyPressed(int key){
+void WinState::keyPressed(int key) {
    
 }

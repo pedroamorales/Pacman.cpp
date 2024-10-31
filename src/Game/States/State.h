@@ -3,6 +3,7 @@
 #include "ofMain.h"
 
 class State {
+	
 	public:
 		State() {}
 		virtual void reset() = 0;
@@ -21,33 +22,28 @@ class State {
 		void windowResized(int w, int h){}
 		void gotMessage(ofMessage msg){}
 		void dragEvent(ofDragInfo dragInfo){}
-		bool hasFinished(){
+
+		bool hasFinished() {
 			return finished;
 		}
-		string getNextState(){
+		string getNextState() {
 			return nextState;
 		}
 		int getID() {
 			return ID;
 		}
-		
-		void setFinished(bool finished){
+		void setFinished(bool finished) {
 			this->finished = finished;
 		}
-
-		void setNextState(string nextState){
+		void setNextState(string nextState) {
 			this->nextState = nextState;
 		}
 		void setID(int ID) {
 			this->ID = ID;
 		}
-		 
-
 
 	private:
 		string nextState;
 		bool finished = false;
 		int ID = 0;
-
-
 };

@@ -5,6 +5,7 @@
 #include "Animation.h" 
 
 class WinState : public State {
+
 private:
 	ofImage img1;
 	Button *resumeButton;
@@ -12,7 +13,6 @@ private:
 	Animation* anim;
 	int score=0;
 	
-
 public:
 	WinState();
 	~WinState();

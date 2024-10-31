@@ -4,8 +4,9 @@
 #include "Player.h"
 #include "MapBuilder.h"
 
-class GameState: public State{
-    public: 
+class GameState: public State {
+    
+	public: 
         GameState();
 		~GameState();
 		void reset();
@@ -23,5 +24,4 @@ class GameState: public State{
 		ofImage mapImage;
 		Map* map;
 		int finalScore=0;
-
 };

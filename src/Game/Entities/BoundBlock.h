@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-class BoundBlock: public Entity{
+class BoundBlock: public Entity {
     public:
         BoundBlock(int, int, int, int, ofImage);
         ~BoundBlock();

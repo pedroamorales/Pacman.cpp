@@ -14,6 +14,7 @@ class Entity {
 		int x, y, width, height, health;
 		ofImage sprite;
 		int ticks = 0;
+		
 	public:
 		explicit Entity(int x, int y, int width, int height);
 		virtual ~Entity();
