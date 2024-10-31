@@ -1,4 +1,6 @@
 #include "GameOverState.h"
+#include "MenuState.h"
+#include "GameState.h"
 
 GameOverState::GameOverState() {
 	startButton = new Button(ofGetWidth()/2, ofGetHeight()/2, 64, 50, "Start");
@@ -43,6 +45,10 @@ void GameOverState::reset(){
 	setFinished(false);
 	setNextState("");
 	startButton->reset();
+}
+
+void GameOverState::ContinueState() {
+
 }
 
 void GameOverState::setScore(int sc){

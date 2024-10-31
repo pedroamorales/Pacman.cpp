@@ -11,10 +11,12 @@ class GameState: public State{
 		void reset();
 		void tick();
 		void render();
+		void ContinueState();
 		void keyPressed(int key);
 		void mousePressed(int x, int y, int button);
 		void keyReleased(int key);
 		int getFinalScore();
+		int GetDotCountState();
 	
 	private:
 		ofSoundPlayer music;

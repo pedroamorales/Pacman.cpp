@@ -38,8 +38,13 @@ void GameState::keyReleased(int key){
 void GameState::reset(){
 	setFinished(false);
 	setNextState("");
-	mapImage.load("images/map2.png");
 	map = MapBuilder().createMap(mapImage);
+}
+
+void GameState::ContinueState() {
+	setFinished(false);
+	setNextState("");
+	map = map;
 }
 
 int GameState::getFinalScore(){
@@ -48,4 +53,8 @@ int GameState::getFinalScore(){
 
 GameState::~GameState(){
 	delete map;
+}
+
+int GameState::GetDotCountState() {
+	return map->GetDotsPlayer();
 }

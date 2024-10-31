@@ -3,24 +3,24 @@
 #include "State.h"
 #include "Button.h"
 #include "Animation.h" 
-#include "ChooseState.h"
 
-
-class MenuState : public State {
+class WinState : public State {
 private:
 	ofImage img1;
-	Button *startButton;
+	Button *resumeButton;
+    Button *quitButton;
 	Animation* anim;
-	
+	int score=0;
 	
 
 public:
-	MenuState();
-	~MenuState();
+	WinState();
+	~WinState();
 	void tick();
 	void render();
 	void keyPressed(int key);
 	void mousePressed(int x, int y, int button);
 	void reset();
+	void setScore(int);
 	void ContinueState();
 };

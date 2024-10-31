@@ -52,3 +52,7 @@ Map::~Map(){
 	delete entityManager;
 	delete gs;
 }
+
+int Map::GetDotsPlayer() {
+	return player->CurrentDotCount();
+}

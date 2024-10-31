@@ -6,13 +6,16 @@
 #include "BigDot.h"
 #include "Ghost.h"
 
+
 class MapBuilder {
     public:
         MapBuilder();
 	    Map* createMap(ofImage);
+      
 
 	private:
         vector<ofImage> bound;
+        vector<Entity> dots;
         int pixelMultiplier;
         ofColor boundBoundBlock;
         ofColor pacman;

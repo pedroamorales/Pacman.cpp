@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "GhostSpawner.h"
+#include "EntityManager.h"
 
 class Map{
     public:
@@ -17,9 +18,10 @@ class Map{
       void keyPressed(int key);
 		  void mousePressed(int x, int y, int button);
 		  void keyReleased(int key);
-
-    private:
       EntityManager *entityManager;
+      int GetDotsPlayer();
+    private:
+      
       Player *player;
       GhostSpawner* gs;
 };

@@ -6,6 +6,7 @@ class State {
 	public:
 		State() {}
 		virtual void reset() = 0;
+		virtual void ContinueState() = 0;
 		virtual void tick() = 0;
 		virtual void render() = 0;
 		virtual void keyPressed(int key) = 0;
@@ -26,6 +27,10 @@ class State {
 		string getNextState(){
 			return nextState;
 		}
+		int getID() {
+			return ID;
+		}
+		
 		void setFinished(bool finished){
 			this->finished = finished;
 		}
@@ -33,9 +38,16 @@ class State {
 		void setNextState(string nextState){
 			this->nextState = nextState;
 		}
+		void setID(int ID) {
+			this->ID = ID;
+		}
+		 
+
 
 	private:
 		string nextState;
 		bool finished = false;
+		int ID = 0;
+
 
 };

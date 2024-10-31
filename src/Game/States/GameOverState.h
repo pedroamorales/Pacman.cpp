@@ -18,4 +18,5 @@ public:
 	void mousePressed(int x, int y, int button);
 	void reset();
 	void setScore(int);
+	void ContinueState();
 };

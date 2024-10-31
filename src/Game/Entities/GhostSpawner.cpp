@@ -18,27 +18,40 @@ void GhostSpawner::tick(){
     colors.push_back("cyan");
     colors.push_back("orange");
 
-    if (em->ghosts.size() < 8) { 
-        if(em->ghosts.size() < 4) {
-            if(spawnCounter == 0){
-                spawnGhost(colors[ofRandom(4)]);
-                spawnCounter = 30*5;
-            }
-            else {
-                spawnCounter--;
-            }
+    if(em->ghosts.size()<4){
+        if(spawnCounter == 0){
+            spawnGhost(colors[ofRandom(4)]);
+            spawnCounter = 30*5;
+        }else{
+            spawnCounter--;
         }
     }
 }
-
 void GhostSpawner::spawnGhost(string color){
     Ghost* g = new Ghost(x,y,width-2,height-2,sprite,em, color);
     em->ghosts.push_back(g);
 }
 
 void GhostSpawner::keyPressed(int key){
-    vector<string> colors = {"red", "pink", "cyan", "orange"};
-    if(key == 'g' && em->ghosts.size() < 8){
-        spawnGhost(colors[ofRandom(4)]);
+    int randmizer = 0;
+    if(key == 'g'){
+    randmizer = rand() % 4;
+    if (em->ghosts.size()<8) { // Check for how many ghosts are spawned in -- Noel
+    switch (randmizer) // Randomizer function for ghosts. -- Noel
+    {
+    case 0:
+        spawnGhost("red");
+        break;
+    case 1:
+        spawnGhost("pink");
+        break;
+    case 2:
+        spawnGhost("cyan");
+        break;
+    case 3:
+        spawnGhost("orange");
+        break;
+    }
+    }
     }
 }

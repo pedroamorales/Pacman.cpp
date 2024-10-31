@@ -3,10 +3,13 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "State.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
     spawnY = y;
+    DotsEaten = 0;
+    DotCount = 0;
     sprite.load("images/pacman.png");
     down.cropFrom(sprite, 0, 48, 16, 16);
     up.cropFrom(sprite, 0, 32, 16, 16);
@@ -91,7 +94,7 @@ void Player::render(){
     for(unsigned int i=0; i<health; i++){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
-    ofDrawBitmapString("Score:"  + to_string(score), ofGetWidth()/2-200, 50);
+    ofDrawBitmapString("Score:"  + to_string(DotCount), ofGetWidth()/2-200, 50);
 }
 
 void Player::keyPressed(int key){
@@ -111,10 +114,11 @@ void Player::keyPressed(int key){
         case 'n':
             die();
             break;
-        case 'm':
+        case 'm': // Check for Max Health - Noel
             if (health < 3) {
-                health++;
+               health++; 
             }
+            
             break;
     }
 }
@@ -140,7 +144,7 @@ void Player::checkCollisions(){
     canMoveDown = true;
     canMoveLeft = true;
     canMoveRight = true;
-
+    CurrentDotCount();
     for(BoundBlock* boundBlock: em->boundBlocks){
         if(this->getBounds(x, y-speed).intersects(boundBlock->getBounds()))
             canMoveUp = false;
@@ -156,13 +160,19 @@ void Player::checkCollisions(){
             if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity)){
                 entity->remove = true;
                 score += 10;
+                DotsEaten++;
+                DotsEaten = DotsEaten/2;
+                
             }
             if(dynamic_cast<BigDot*>(entity)){
                 score +=20;
+                
                 em->setKillable(true);
+                
             }
         }
     }
+    
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
@@ -188,4 +198,16 @@ Player::~Player(){
     delete walkDown;
     delete walkLeft;
     delete walkRight;
+}
+
+int Player::CurrentDotCount() {
+    DotCount = 0;
+    for(Entity* entity:em->entities){
+        if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity)){
+                DotCount += 1;
+                
+            }
+    }
+    DotCount -= DotsEaten;
+    return DotCount;
 }

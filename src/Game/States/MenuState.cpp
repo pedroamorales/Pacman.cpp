@@ -46,6 +46,9 @@ void MenuState::reset(){
 	startButton->reset();
 }
 
+void MenuState::ContinueState() {
+}
+
 MenuState::~MenuState(){
 	delete startButton;
 	delete anim;

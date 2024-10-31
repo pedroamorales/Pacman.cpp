@@ -4,30 +4,69 @@ void ofApp::setup(){
 	ofSetFrameRate(30);
 	ofSetWindowTitle("C++ Game Box");
 	//States
+	chooseState = new ChooseState();
 	menuState = new MenuState();
 	gameState = new GameState();
 	gameOverState = new GameOverState();
+	pauseState = new PauseState();
+	winState = new WinState();
+	
 	// Initial State
-	currentState = menuState;
+	currentState = chooseState;
+	
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	currentState->setID(chooseState->getIDc());
 	if (currentState != nullptr){
+		
 		currentState->tick();
 		if(currentState->hasFinished()){
 			if(currentState->getNextState() == "Menu"){
+				if(Pcheck) {
+					Pcheck = false;
+				}
 				currentState = menuState;
+				currentState->reset();
 			}else if(currentState->getNextState() == "Game"){
+				
 				currentState = gameState;
+				Wcheck = false;
+				if(Pcheck) {
+					Pcheck = false;
+					currentState->ContinueState();
+				} else {
+				currentState->reset();
+				}
+			}else if(currentState->getNextState() == "Pause"){
+				
+				currentState = pauseState;
+				currentState->reset();
+			}else if(currentState->getNextState() == "Win" && !Wcheck){
+				
+				currentState = winState;
+				currentState->reset();
+				Wcheck = true;
 			}else if(currentState->getNextState() == "over"){
+				
 				gameOverState->setScore(gameState->getFinalScore());
 				currentState = gameOverState;
+				gameState->reset();
+				currentState->reset();
+				
 			}
-			currentState->reset();
+		
 		}
 	}
-		
+	
+	if(gameState->GetDotCountState() == 0 && !Wcheck) {
+		currentState->setNextState("Win");
+		currentState->setFinished(true);
+	}
+	
+	
 }
 
 //--------------------------------------------------------------
@@ -50,6 +89,18 @@ void ofApp::keyPressed(int key){
 	if( key == '=' ){
 		ofSoundSetVolume(1);
 	}
+	if (key == 'p') {
+		currentState->setNextState("Pause");
+		currentState->setFinished(true);
+		Pcheck = true;
+	}
+	if (key == 'y') {
+		currentState->setNextState("Win");
+		currentState->setFinished(true);
+	}
+	
+	
+	
 
 }
 

@@ -8,7 +8,9 @@ class GhostSpawner: public Entity{
         void spawnGhost(string);
         void keyPressed(int);
         void tick();
+
     private:
         EntityManager* em;
         int spawnCounter = 30*5;
+        
 };

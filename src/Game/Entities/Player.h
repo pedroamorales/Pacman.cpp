@@ -16,7 +16,7 @@ class Player: public Entity{
         unsigned int health=3;
         int score=0;
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
-        int speed = 4;
+        int speed = 6;
         bool walking = false;
         MOVING moving;
         FACING facing = DOWN;
@@ -45,4 +45,7 @@ class Player: public Entity{
         void reset();
         void checkCollisions();
         void die();
+        int CurrentDotCount();
+        int DotCount;
+        int DotsEaten;
 };

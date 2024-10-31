@@ -67,6 +67,7 @@ Map* MapBuilder::createMap(ofImage mapImage){
             }else if(currentPixel == dotC){
                 Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(dot);
+				
             }else if(currentPixel == bigDotC){
                 BigDot* bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(bigDot);
