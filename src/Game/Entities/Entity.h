@@ -25,4 +25,15 @@ class Entity {
 		bool collides(Entity* entity);
 		ofRectangle getBounds();
 		ofRectangle getBounds(int x, int y);
+
+		int getPosX() { return this->x; }
+		int getPosY() { return this->y; }
+		void setPosX(int x) {this->x = x; }
+		void setPosY(int y) {this->y = y; }
+
+
+		// Pacman Invisibility Member Variables
+		bool renderEntity = true;
+		bool isKillable = true;
+		int invisCounter = 0;
 };
