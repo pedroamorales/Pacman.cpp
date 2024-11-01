@@ -10,10 +10,8 @@ private:
 	ofImage img2;
 	ofImage img3;
 	ofImage img4;
-	Button *yellowButton;
-    Button *blueButton;
-	Button *greenButton;
-	Button *redButton;
+	Button *PacmanButton;
+    Button *MrsPacmanButton;
 	Animation* anim;
 	int IDc;
 

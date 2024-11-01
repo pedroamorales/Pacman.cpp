@@ -2,7 +2,6 @@
 
 #include "Player.h"
 #include "GhostSpawner.h"
-#include "EntityManager.h"
 
 class Map {
 
@@ -12,6 +11,7 @@ class Map {
       void addBoundBlock(BoundBlock*);
       void addEntity(Entity*);
       Player* getPlayer();
+      EntityManager* getEntityManager();
       void setPlayer(Player*);
       void setGhostSpawner(GhostSpawner*);
       void tick();

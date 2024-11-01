@@ -13,7 +13,11 @@ void Map::tick() {
 void Map::render() {
     ofSetBackgroundColor(0, 0, 0);
 	entityManager->render();
-	player->render();
+	if(player->renderEntity == true) {
+		player->render();
+	} else {
+		player->invisCounter--;
+	}
 }
 
 void Map::keyPressed(int key) {
@@ -57,4 +61,8 @@ Map::~Map() {
 
 int Map::GetDotsPlayer() {
 	return player->CurrentDotCount();
+}
+
+EntityManager* Map::getEntityManager() {
+	return this->entityManager;
 }

@@ -4,6 +4,14 @@
 #include "BigDot.h"
 #include "Ghost.h"
 #include "State.h"
+#include "Cherry.h"
+#include "Strawberry.h"
+#include "FruitRandomizer.h"
+#include "CherryPowerup.h"
+#include "StrawberryPowerUp.h"
+#include "RandomPowerUp.h"
+#include "UltimateKey.h"
+#include "UltimatePowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height) {
     spawnX = x;
@@ -76,6 +84,11 @@ void Player::tick() {
         x+=speed;
         walkRight->tick();
     }
+    if(invisCounter < 0){
+        this->renderEntity = true;
+        this->isKillable = true;
+        this->unkillableTimer = 30*10;
+    }
 }
 
 void Player::render() {
@@ -99,6 +112,14 @@ void Player::render() {
     }
 
     ofDrawBitmapString("Score:"  + to_string(DotCount), ofGetWidth()/2-200, 50);
+
+    string pws = "Powerups: ";
+    for(Powerup* p: powerupList) {
+        pws += p->toString();
+        pws += ", ";
+    } 
+    pws.erase(pws.begin() + pws.length()-1);
+    ofDrawBitmapString(pws, ofGetWidth()/2-200,  ofGetHeight()-50);
 }
 
 void Player::keyPressed(int key) {
@@ -121,6 +142,13 @@ void Player::keyPressed(int key) {
         case 'm': // Check for Max Health - Noel
             if (health < 3) {
                health++; 
+            }
+            break;
+        case ' ':
+            if(powerupList.size() > 0) {
+                powerupList[0]->em = this->em;
+                powerupList[0]->activate();
+                powerupList.erase(powerupList.begin());
             }
             break;
     }
@@ -169,10 +197,33 @@ void Player::checkCollisions() {
                 DotsEaten++;
                 DotsEaten = DotsEaten/2;
             }
-
             if(dynamic_cast<BigDot*>(entity)) {
                 score +=20;
                 em->setKillable(true);
+            }
+            if(dynamic_cast<BigDot*>(entity)){
+                score +=20;
+                em->setKillable(true);
+                this->isKillable = false;
+            }
+            if(dynamic_cast<Cherry*>(entity)){
+                powerupList.push_back(new CherryPowerup(this));
+                entity->remove = true;
+            }
+            if(dynamic_cast<Strawberry*>(entity)){
+                //strawberry collision
+                powerupList.push_back(new StrawberryPowerup(this));
+                entity->remove = true;
+            }
+            if(dynamic_cast<RandomFruit*>(entity)){
+                //strawberry collision
+                powerupList.push_back(new RandomPowerup(this));
+                entity->remove = true;
+            }
+            if(dynamic_cast<UltimateKey*>(entity)) {
+                UltimatePowerup* sorter = new UltimatePowerup(this);
+                sorter->activate();
+                entity->remove = true;
             }
         }
     }

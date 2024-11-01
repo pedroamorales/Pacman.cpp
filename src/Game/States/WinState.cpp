@@ -3,7 +3,7 @@
 #include "GameState.h"
 
 WinState::WinState() {
-	resumeButton = new Button(ofGetWidth()/2+132, ofGetHeight()/2, 64, 50, "Resume");
+	resumeButton = new Button(ofGetWidth()/2+132, ofGetHeight()/2, 64, 50, "Play Again");
     quitButton = new Button(ofGetWidth()/2-132, ofGetHeight()/2, 64, 50, "Quit");
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
