@@ -34,11 +34,11 @@ void GhostSpawner::spawnGhost(string color) {
 }
 
 void GhostSpawner::keyPressed(int key) {
-    int randmizer = 0;
+    int randomizer = 0;
     if (key == 'g') {
-    randmizer = rand() % 4;
+    randomizer = rand() % 4;
     if (em->ghosts.size()<8) { 
-    switch (randmizer) 
+    switch (randomizer) 
     {
     case 0:
         spawnGhost("red");
