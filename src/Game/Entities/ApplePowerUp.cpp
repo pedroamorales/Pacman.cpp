@@ -1,14 +1,12 @@
 #include "ApplePowerup.h"
-#include "Entity.h"
+#include "Player.h"
 
 ApplePowerup::ApplePowerup(Player* p) {
     this->p = p;
 }
 
 void ApplePowerup::activate() {
-    Entity* toTeleport = em->entities[ofRandom(em->entities.size())];
-    p->setPosX(toTeleport->getPosX());
-    p->setPosY(toTeleport->getPosY());
+    p->speed = 8;
 }
 
 string ApplePowerup::toString() {

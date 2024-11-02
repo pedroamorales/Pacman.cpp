@@ -18,7 +18,7 @@ class Player: public Entity {
         unsigned int health=3;
         int score=0;
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
-        int speed = 4;
+
         bool walking = false;
         bool containsPowerup = false;
         bool ultimateKeySpawned = false;
@@ -37,6 +37,7 @@ class Player: public Entity {
         ~Player();
         int getHealth();
         int getScore();
+        int speed = 4;
         FACING getFacing();
         void setHealth(int);
         void setScore(int);
