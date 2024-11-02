@@ -8,10 +8,15 @@ ChooseState::ChooseState() {
     MrsPacmanButton = new Button(ofGetWidth()/2+220, ofGetHeight()/2, 64, 50, "Mrs. Pacman");
 	
 	img1.load("images/pacman.png");
+	img2.load("images/mrspacman.png");
 	vector<ofImage> rightAnimframes;
     ofImage temp;
 	for (int i=0; i<3; i++) {
         temp.cropFrom(img1, i*16, 0, 16, 16);
+        rightAnimframes.push_back(temp);
+    }
+	for (int i=0; i<3; i++) {
+        temp.cropFrom(img2, i*16, 0, 16, 16);
         rightAnimframes.push_back(temp);
     }
 
@@ -23,11 +28,13 @@ void ChooseState::tick() {
 	MrsPacmanButton->tick();
 	anim->tick();
 	if (PacmanButton->wasPressed()) {
+		img1.load("images/pacman.png");
 		setID(0);
 		setNextState("Menu");
 		setFinished(true);
 	}
 	if(MrsPacmanButton->wasPressed()) {
+		img2.load("images/mrspacman.png");
 		setID(1);
 		setNextState("Menu");
 		setFinished(true);

@@ -16,7 +16,8 @@ Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(
     spawnY = y;
     DotsEaten = 0;
     DotCount = 0;
-    sprite.load("images/pacman.png");
+    sprite.load("images/pacman.png");    
+    sprite.load("images/mrspacman.png");
     down.cropFrom(sprite, 0, 48, 16, 16);
     up.cropFrom(sprite, 0, 32, 16, 16);
     left.cropFrom(sprite, 0, 16, 16, 16);

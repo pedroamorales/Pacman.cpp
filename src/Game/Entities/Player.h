@@ -20,7 +20,6 @@ class Player: public Entity {
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
         bool walking = false;
         bool containsPowerup = false;
-        bool ultimateKeySpawned = false;
         MOVING moving;
         FACING facing = DOWN;
         ofImage up, down, left, right;

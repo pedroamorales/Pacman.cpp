@@ -15,7 +15,8 @@ void Map::render() {
 	entityManager->render();
 	if(player->renderEntity == true) {
 		player->render();
-	} else {
+	} 
+	else {
 		player->invisCounter--;
 	}
 	if(player->speed == 8) {

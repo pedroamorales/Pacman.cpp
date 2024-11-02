@@ -8,8 +8,6 @@ class ChooseState : public State {
 private:
 	ofImage img1;
 	ofImage img2;
-	ofImage img3;
-	ofImage img4;
 	Button *PacmanButton;
     Button *MrsPacmanButton;
 	Animation* anim;
