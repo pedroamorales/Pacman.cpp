@@ -18,6 +18,9 @@ void Map::render() {
 	} else {
 		player->invisCounter--;
 	}
+	if(player->speed == 8) {
+		player->increasedSpeedTimer--;
+	}
 }
 
 void Map::keyPressed(int key) {

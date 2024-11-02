@@ -37,4 +37,7 @@ class Entity {
 		bool isKillable = true;
 		int invisCounter = 0;
 
+		// Pacman Speed Increase Timer
+		int increasedSpeedTimer = 0;
+
 };

@@ -18,7 +18,6 @@ class Player: public Entity {
         unsigned int health=3;
         int score=0;
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
-
         bool walking = false;
         bool containsPowerup = false;
         bool ultimateKeySpawned = false;

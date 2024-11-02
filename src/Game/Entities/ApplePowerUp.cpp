@@ -7,6 +7,7 @@ ApplePowerup::ApplePowerup(Player* p) {
 
 void ApplePowerup::activate() {
     p->speed = 8;
+    p->increasedSpeedTimer = 30*3;
 }
 
 string ApplePowerup::toString() {

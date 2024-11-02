@@ -87,6 +87,9 @@ void Player::tick() {
         this->isKillable = true;
         this->unkillableTimer = 30*10;
     }
+    if(increasedSpeedTimer == 0) {
+        this->speed = 4;
+    }
 }
 
 void Player::render() {
