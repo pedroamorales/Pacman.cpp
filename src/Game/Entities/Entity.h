@@ -26,14 +26,15 @@ class Entity {
 		ofRectangle getBounds();
 		ofRectangle getBounds(int x, int y);
 
+		// Pacman Teleportation
 		int getPosX() { return this->x; }
 		int getPosY() { return this->y; }
 		void setPosX(int x) {this->x = x; }
 		void setPosY(int y) {this->y = y; }
 
-
-		// Pacman Invisibility Member Variables
+		// Pacman Invisibility 
 		bool renderEntity = true;
 		bool isKillable = true;
 		int invisCounter = 0;
+
 };

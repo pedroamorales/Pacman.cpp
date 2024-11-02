@@ -2,17 +2,13 @@
 #include "PowerUp.h"
 #include "Player.h"
 
-class RandomPowerup : public Powerup {
+class ApplePowerup: public Powerup {
     public:
-        RandomPowerup(Player* p);
         void activate();
+        ApplePowerup(Player* p);
         Player* p;
         string toString();
-        int compareTo(Powerup* p2) {
-            return this->rank - p2->rank;
-        }
-
+    
     private:
         int rank = 3;
-        
 };

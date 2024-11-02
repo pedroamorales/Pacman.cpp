@@ -1,7 +1,7 @@
 #include "MapBuilder.h"
 #include "Cherry.h"
 #include "Strawberry.h"
-#include "FruitRandomizer.h"
+#include "Apple.h"
 
 MapBuilder::MapBuilder() {
 	entityManager = new EntityManager();
@@ -52,7 +52,7 @@ Map* MapBuilder::createMap(ofImage mapImage) {
 
 	bool cherrySpawned = false;
 	bool strawberrySpawned = false;
-	bool randomFruitSpawned = false;
+	bool AppleSpawned = false;
 
 	ofPixels pixels = mapImage.getPixels();
 	Map* mapInCreation =  new Map(entityManager);
@@ -102,13 +102,13 @@ Map* MapBuilder::createMap(ofImage mapImage) {
 		mapInCreation->addEntity(strawberry);
 		strawberrySpawned = true;
 	}
-	if(!randomFruitSpawned) {
+	if(!AppleSpawned) {
 		Entity* toSpawnOn = getRandomDot(mapInCreation);
 		int xPos = toSpawnOn->getPosX();
 		int yPos = toSpawnOn->getPosY();
-		RandomFruit* randomFruit = new RandomFruit(xPos, yPos, pixelMultiplier, pixelMultiplier, pacmanSpriteSheet);
-		mapInCreation->addEntity(randomFruit);
-		strawberrySpawned = true;
+		Apple* apple = new Apple(xPos, yPos, pixelMultiplier, pixelMultiplier, pacmanSpriteSheet);
+		mapInCreation->addEntity(apple);
+		AppleSpawned = true;
 	}
 
     return mapInCreation;

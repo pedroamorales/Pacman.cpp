@@ -6,12 +6,10 @@
 #include "State.h"
 #include "Cherry.h"
 #include "Strawberry.h"
-#include "FruitRandomizer.h"
+#include "Apple.h"
 #include "CherryPowerup.h"
 #include "StrawberryPowerUp.h"
-#include "RandomPowerUp.h"
-#include "UltimateKey.h"
-#include "UltimatePowerUp.h"
+#include "ApplePowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height) {
     spawnX = x;
@@ -215,14 +213,9 @@ void Player::checkCollisions() {
                 powerupList.push_back(new StrawberryPowerup(this));
                 entity->remove = true;
             }
-            if(dynamic_cast<RandomFruit*>(entity)){
-                //strawberry collision
-                powerupList.push_back(new RandomPowerup(this));
-                entity->remove = true;
-            }
-            if(dynamic_cast<UltimateKey*>(entity)) {
-                UltimatePowerup* sorter = new UltimatePowerup(this);
-                sorter->activate();
+            if(dynamic_cast<Apple*>(entity)){
+                //apple collision
+                powerupList.push_back(new ApplePowerup(this));
                 entity->remove = true;
             }
         }
